@@ -1,7 +1,9 @@
 import React from "react";
+import { useLoaderData } from "react-router";
 
 const EventDetails = () => {
-
+  const data = useLoaderData()
+  console.log(data)
   const event = {
     title: "Beach Cleanup Drive",
     description:

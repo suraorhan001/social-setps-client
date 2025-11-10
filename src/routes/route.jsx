@@ -8,6 +8,7 @@ import ManageEvent from "../Pages/ManageEvent";
 import PraivateRoute from "../Provider/PraivateRoute";
 import UpComming from "../Pages/UpComming";
 import EventDetails from "../Pages/EventDetails";
+import { id } from "react-day-picker/locale";
 
 export const route = createBrowserRouter([
   {
@@ -39,8 +40,10 @@ export const route = createBrowserRouter([
         </PraivateRoute>
       },
       {
-       path:'/event-details',
-       element:<EventDetails></EventDetails>
+       path:'/event-details/:id',
+       element:<EventDetails></EventDetails>,
+       loader:({params})=>fetch(`http://localhost:3000/upcoming-social-steps/${params.id}`)
+       
       },
       {
         path:'/manage-event',
