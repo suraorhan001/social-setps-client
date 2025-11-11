@@ -9,6 +9,7 @@ import PraivateRoute from "../Provider/PraivateRoute";
 import UpComming from "../Pages/UpComming";
 import EventDetails from "../Pages/EventDetails";
 import { id } from "react-day-picker/locale";
+import JointEvent from "../Pages/JointEvent";
 
 export const route = createBrowserRouter([
   {
@@ -51,6 +52,12 @@ export const route = createBrowserRouter([
           <ManageEvent></ManageEvent>
         </PraivateRoute>
       },
+      {
+        path:'/joined-event',
+        element:<PraivateRoute>
+          <JointEvent></JointEvent>
+        </PraivateRoute>
+      }
 
 
     ],

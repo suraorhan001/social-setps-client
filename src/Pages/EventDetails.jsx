@@ -1,20 +1,56 @@
-import React from "react";
-import { useLoaderData } from "react-router";
+import React, { use } from "react";
+import { useLoaderData, useNavigate } from "react-router";
+import { AuthContext } from "../Provider/AuthContext";
 
 const EventDetails = () => {
+    const {user} = use(AuthContext)
+    const navigate = useNavigate()
   const data = useLoaderData()
-  console.log(data)
-  const event = {
-    title: "Beach Cleanup Drive",
-    description:
-      "Join us for a fun and productive day cleaning up the local beach. Let's make our environment cleaner and greener together!",
-    eventType: "Cleanup",
-    thumbnail: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e",
-    location: "Sunny Beach, California",
-    eventDate: "2025-12-15T10:00:00.000Z",
-    createdBy: "alice@example.com",
+  const event = data?.result
+  console.log(event)
+
+
+const handleJoin = (event) => {
+  
+  if (!user || !user.email) {
+    alert("Please log in to join this event.");
+    navigate('/login')
+    return;
+  }
+
+  const joinData = {
+    userEmail: user.email,
+    eventId: event._id,
+    eventTitle: event.eventTitle || event.title,
+    eventDate: event.eventDate,
+    location: event.location,
+    thumbnail: event.thumbnail,
   };
 
+  
+  fetch("http://localhost:3000/join-event", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(joinData),
+  })
+    .then((res) => res.json())
+    .then((data) => {
+      if (data?.message === "Already joined this event") {
+        alert("You’ve already joined this event!");
+      } else if (data?.message === "Event joined successfully!" ) {
+        alert("Joined Successfully!");
+        navigate('/joined-event')
+      } else {
+        alert( "Something went wrong!");
+      }
+    })
+    .catch((err) => {
+      console.error("Error joining event:", err);
+      alert("Server error! Please try again later.");
+    });
+};
+
+ 
   return (
     <div className="min-h-screen bg-green-50 py-12 px-4">
       <div className="max-w-4xl mx-auto bg-white p-8 rounded-3xl shadow-2xl transform transition duration-500 hover:scale-105">
@@ -49,7 +85,7 @@ const EventDetails = () => {
           </div>
         </div>
 
-        <button
+        <button onClick={()=>handleJoin(event)}
           className="w-full md:w-auto bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-6 rounded-xl shadow-lg transition-all duration-300 hover:shadow-xl"
         >
           Join Event

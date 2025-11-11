@@ -107,7 +107,7 @@ const Navbar = () => {
                     </Link>
 
                     <Link
-                      to="/joined-events"
+                      to="/joined-event"
                       className="block px-4 py-2 text-gray-700 hover:bg-green-50"
                       onClick={() => setDropdownOpen(false)}
                     >

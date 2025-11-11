@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router";
 import { Calendar, MapPin } from "lucide-react";
 
-const EventCard = ({ event }) => {
+const EventCard = ({ event , hideViewDetailsButton }) => {
   const { _id, title, description, thumbnail, location, eventType, eventDate } = event;
 
   const formattedDate = new Date(eventDate).toLocaleDateString("en-US", {
@@ -45,12 +45,13 @@ const EventCard = ({ event }) => {
         </div>
 
         <div className="pt-3">
-          <Link
-            to={`/event-details/${_id}`}
-            className="inline-block w-full text-center bg-green-600 text-white py-2 rounded-lg hover:bg-green-700 transition-colors font-medium"
-          >
-            View Event
+          {!hideViewDetailsButton && (
+          <Link to={`/event-details/${event.eventId || event._id}`}>
+            <button className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700">
+              View Details
+            </button>
           </Link>
+        )}
         </div>
       </div>
     </div>
