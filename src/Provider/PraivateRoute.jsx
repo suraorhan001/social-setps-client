@@ -8,7 +8,9 @@ const PraivateRoute = ({children}) => {
 if(user && user?.email){
   return children
 }
-  return <Navigate state={location.pathname} to= '/login'></Navigate>  
+  if(!user)  {
+    return <Navigate state={location.pathname} to= '/login'></Navigate>
+  }
 };
 
 export default PraivateRoute;

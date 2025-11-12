@@ -1,6 +1,9 @@
 import React from "react";
 
-const ManageEventCard = ({ event, onDelete, onUpdate }) => {
+const ManageEventCard = ({ event, onDelete, onUpdate })=>
+    {
+   
+
   return (
     <div className="bg-white p-6 rounded-2xl shadow-xl hover:scale-105 transition-transform duration-300">
       <img

@@ -8,8 +8,10 @@ import ManageEvent from "../Pages/ManageEvent";
 import PraivateRoute from "../Provider/PraivateRoute";
 import UpComming from "../Pages/UpComming";
 import EventDetails from "../Pages/EventDetails";
-import { id } from "react-day-picker/locale";
+//import { id } from "react-day-picker/locale";
 import JointEvent from "../Pages/JointEvent";
+import UpdateEventForm from "../Pages/UpdateEvent";
+import UpdateEvent from "../Pages/UpdateEvent";
 
 export const route = createBrowserRouter([
   {
@@ -23,7 +25,7 @@ export const route = createBrowserRouter([
       {
       path:'/upcomming',
         element: <UpComming></UpComming>,
-        loader:()=>fetch('http://localhost:3000/upcoming-social-steps')
+        // loader:()=>fetch('http://localhost:3000/upcoming-social-steps')
       },
 
       {
@@ -46,6 +48,11 @@ export const route = createBrowserRouter([
        loader:({params})=>fetch(`http://localhost:3000/upcoming-social-steps/${params.id}`)
        
       },
+      // {
+      //  path:'/event-details/:id',
+      //  element:<EventDetails></EventDetails>,
+        
+      // },
       {
         path:'/manage-event',
         element:<PraivateRoute>
@@ -57,7 +64,16 @@ export const route = createBrowserRouter([
         element:<PraivateRoute>
           <JointEvent></JointEvent>
         </PraivateRoute>
-      }
+      },
+       {
+      path: "/update-event/:id",
+     element: <UpdateEvent />,
+     loader: async ({ params }) => {
+    const res = await fetch(`http://localhost:3000/upcoming-social-steps/${params.id}`);
+    const data = await res.json();
+    return data.result;
+     },
+   }
 
 
     ],

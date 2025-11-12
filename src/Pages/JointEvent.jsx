@@ -10,7 +10,11 @@ const JointEvent = () => {
   useEffect(() => {
     if (!user || !user.email) return;
 
-    fetch(`http://localhost:3000/joined-events/${user.email}`)
+    fetch(`http://localhost:3000/joined-events/${user.email}`,{
+      headers:{
+        authorization:`Bearer ${user.accessToken}`
+      }
+    })
       .then((res) => res.json())
       .then((data) => {
         if (data.success) {
