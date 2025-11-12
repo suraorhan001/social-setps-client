@@ -28,11 +28,11 @@ const Login = () => {
   
    const email = e.target.email.value;
    const password = e.target.password.value;
-   console.log(email,password)
+   //console.log(email,password)
    login(email,password)
    .then((res)=>{
     const user = res.user
-    console.log(user)
+   // console.log(user)
   navigate(`${location.state?location.state : '/'}`)
    })
    .catch((err)=>{

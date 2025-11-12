@@ -5,7 +5,7 @@ import { auth } from '../firebase/firebase.config';
 
 const AuthProvider = ({children}) => {
     const [user,setUser] = useState(null)
-    console.log(user)
+    //console.log(user)
     //register
     const createUser = (email,password)=>{
         return createUserWithEmailAndPassword(auth,email,password)
