@@ -31,13 +31,6 @@ const JointEvent = () => {
       });
   }, [user]);
 
-  //   if (!user) {
-  //     return (
-  //       <div className="text-center mt-20 text-xl text-red-500">
-  //         Please log in to see your joined events.
-  //       </div>
-  //     );
-  //   }
 
   if (loading) {
     return (
