@@ -89,7 +89,7 @@ const Login = () => {
           </button>
         </div>
 
-        {/* Links: Register & Forget Password */}
+    
         <div className="mt-4 flex justify-between text-gray-600 text-sm">
           <Link to="/register" className="text-blue-600 hover:underline">
             Don't have an account? Register
