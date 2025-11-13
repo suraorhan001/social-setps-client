@@ -29,7 +29,6 @@ const EventCard = ({ event , hideViewDetailsButton }) => {
     "
   ></div>
 
-  {/* Transparent Inner Layer */}
   <div
     className="
       relative rounded-2xl bg-transparent
@@ -50,7 +49,7 @@ const EventCard = ({ event , hideViewDetailsButton }) => {
     {/* Content */}
     <div className="p-5 space-y-3">
       
-      {/* Top Row: Event Type & Date */}
+     
       <div className="flex justify-between items-center">
         <span
           className="
