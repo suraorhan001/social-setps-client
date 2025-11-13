@@ -25,7 +25,7 @@ export const route = createBrowserRouter([
       {
         path: "/upcomming",
         element: <UpComming></UpComming>,
-        // loader:()=>fetch('https://social-platform-server-psi.vercel.app/upcoming-social-steps')
+     
       },
 
       {
