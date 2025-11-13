@@ -1,25 +1,23 @@
-
 import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { AuthContext } from "../Provider/AuthContext";
+import toast from "react-hot-toast";
 
 const EventCreate = () => {
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
 
- 
   const [eventDate, setEventDate] = useState(null);
   const [error, setError] = useState("");
-  
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    
+
     if (!eventDate) {
-    setError("Please select an event date!");
-    return;
+      setError("Please select an event date!");
+      return;
     }
     const today = new Date();
     if (eventDate < today) {
@@ -29,38 +27,43 @@ const EventCreate = () => {
 
     // Event object
     const newEvent = {
-      title:e.target.title.value ,
-      description:e.target.title.value, 
-      eventType:e.target.eventType.value,
-      thumbnail:e.target.thumbnail.value,
-      location:e.target.location.value,
-      eventDate:eventDate.toISOString(),
+      title: e.target.title.value,
+      description: e.target.title.value,
+      eventType: e.target.eventType.value,
+      thumbnail: e.target.thumbnail.value,
+      location: e.target.location.value,
+      eventDate: eventDate.toISOString(),
       createdBy: user.email,
     };
 
-    fetch('http://localhost:3000/upcoming-social-steps',{
-      method:'POST',
-      headers:{
-        'Content-Type': 'application/json',
-      },
-      body:JSON.stringify(newEvent)
-    }).then(res => res.json())
-    .then(data =>{
-      console.log(data)
-    })
-    .catch(err =>{
-      console.log(err)
-    })
-    
+    fetch(
+      "https://social-platform-server-psi.vercel.app/upcoming-social-steps",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          authorization: `Bearer ${user.accessToken}`,
+        },
+        body: JSON.stringify(newEvent),
+      }
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
     //console.log("New Event:", newEvent);
 
     // Success message
-    alert("Event created successfully!");
-    navigate("/upcomming"); 
+    toast.success("Event created successfully!");
+    navigate("/upcomming");
   };
 
   return (
-    <div className="min-h-screen bg-green-50 py-16">
+    <div className="min-h-screen py-16">
       <div className="max-w-3xl mx-auto bg-white p-8 rounded-2xl shadow-lg">
         <h2 className="text-3xl font-bold text-green-700 mb-6 text-center">
           Create New Event
@@ -72,10 +75,11 @@ const EventCreate = () => {
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-gray-700 font-medium mb-1">Event Title</label>
+            <label className="block text-gray-700 font-medium mb-1">
+              Event Title
+            </label>
             <input
               type="text"
-              
               className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
               placeholder="Enter event title"
               name="title"
@@ -84,25 +88,25 @@ const EventCreate = () => {
           </div>
 
           <div>
-            <label className="block text-gray-700 font-medium mb-1">Description</label>
+            <label className="block text-gray-700 font-medium mb-1">
+              Description
+            </label>
             <textarea
-            
               className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
               placeholder="Write a short description"
               name="description"
               required
-
             />
           </div>
 
           <div>
-            <label className="block text-gray-700 font-medium mb-1">Event Type</label>
+            <label className="block text-gray-700 font-medium mb-1">
+              Event Type
+            </label>
             <select
-             
               className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
-               name="eventType"
-               required
-
+              name="eventType"
+              required
             >
               <option value="">Select type</option>
               <option value="Cleanup">Cleanup</option>
@@ -112,41 +116,42 @@ const EventCreate = () => {
           </div>
 
           <div>
-            <label className="block text-gray-700 font-medium mb-1">Thumbnail Image URL</label>
+            <label className="block text-gray-700 font-medium mb-1">
+              Thumbnail Image URL
+            </label>
             <input
-              
               className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
               placeholder="Enter image URL"
-               name="thumbnail"
+              name="thumbnail"
               required
-
             />
           </div>
 
           <div>
-            <label className="block text-gray-700 font-medium mb-1">Location</label>
+            <label className="block text-gray-700 font-medium mb-1">
+              Location
+            </label>
             <input
               type="text"
-             
               className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
               placeholder="Enter location"
               name="location"
               required
-
             />
           </div>
 
           <div>
-            <label className="block text-gray-700 font-medium mb-1">Event Date</label>
+            <label className="block text-gray-700 font-medium mb-1">
+              Event Date
+            </label>
             <DatePicker
               selected={eventDate}
               onChange={(date) => setEventDate(date)}
-j              minDate={new Date()}
+              j
+              minDate={new Date()}
               className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
               placeholderText="Select a future date"
               name="eventDate"
-             
-
             />
           </div>
 
@@ -163,4 +168,3 @@ j              minDate={new Date()}
 };
 
 export default EventCreate;
-

@@ -19,63 +19,71 @@ export const route = createBrowserRouter([
     element: <Root></Root>,
     children: [
       {
-       index:true,
+        index: true,
         element: <Home></Home>,
       },
       {
-      path:'/upcomming',
+        path: "/upcomming",
         element: <UpComming></UpComming>,
-        // loader:()=>fetch('http://localhost:3000/upcoming-social-steps')
+        // loader:()=>fetch('https://social-platform-server-psi.vercel.app/upcoming-social-steps')
       },
 
       {
-        path:'/login',
-        element:<Login></Login>
+        path: "/login",
+        element: <Login></Login>,
       },
       {
-        path:'/register',
-        element:<Register></Register>
+        path: "/register",
+        element: <Register></Register>,
       },
       {
-        path:'/create-event',
-        element:<PraivateRoute>
-             <EventCreate></EventCreate>
-        </PraivateRoute>
+        path: "/create-event",
+        element: (
+          <PraivateRoute>
+            <EventCreate></EventCreate>
+          </PraivateRoute>
+        ),
       },
       {
-       path:'/event-details/:id',
-       element:<EventDetails></EventDetails>,
-       loader:({params})=>fetch(`http://localhost:3000/upcoming-social-steps/${params.id}`)
-       
+        path: "/event-details/:id",
+        element: <EventDetails></EventDetails>,
+        loader: ({ params }) =>
+          fetch(
+            `https://social-platform-server-psi.vercel.app/upcoming-social-steps/${params.id}`
+          ),
       },
       // {
       //  path:'/event-details/:id',
       //  element:<EventDetails></EventDetails>,
-        
+
       // },
       {
-        path:'/manage-event',
-        element:<PraivateRoute>
-          <ManageEvent></ManageEvent>
-        </PraivateRoute>
+        path: "/manage-event",
+        element: (
+          <PraivateRoute>
+            <ManageEvent></ManageEvent>
+          </PraivateRoute>
+        ),
       },
       {
-        path:'/joined-event',
-        element:<PraivateRoute>
-          <JointEvent></JointEvent>
-        </PraivateRoute>
+        path: "/joined-event",
+        element: (
+          <PraivateRoute>
+            <JointEvent></JointEvent>
+          </PraivateRoute>
+        ),
       },
-       {
-      path: "/update-event/:id",
-     element: <UpdateEvent />,
-     loader: async ({ params }) => {
-    const res = await fetch(`http://localhost:3000/upcoming-social-steps/${params.id}`);
-    const data = await res.json();
-    return data.result;
-     },
-   }
-
-
+      {
+        path: "/update-event/:id",
+        element: <UpdateEvent />,
+        loader: async ({ params }) => {
+          const res = await fetch(
+            `https://social-platform-server-psi.vercel.app/upcoming-social-steps/${params.id}`
+          );
+          const data = await res.json();
+          return data.result;
+        },
+      },
     ],
   },
 ]);

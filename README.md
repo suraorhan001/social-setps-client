@@ -1,16 +1,59 @@
-# React + Vite
+# Social Development Events Platform
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A community-driven event management platform where users can **create**, **join**, and **track** social service events happening in their local area.  
+---
 
-Currently, two official plugins are available:
+## Live Links
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Client Live URL:** https://your-client-site.netlify.app  
+- **GitHub Repository:** https://github.com/yourusername/social-platform  
 
-## React Compiler
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Website Features
 
-## Expanding the ESLint configuration
+ **User Authentication:**  
+Users can register, log in, and stay logged in even after page reload using Firebase Authentication.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+**Create & Manage Events:**  
+Logged-in users can create social events, edit details, or delete their own events.
+
+**Join Events:**  
+Users can join events posted by others and view all the events they’ve joined.
+
+**Filter & Search:**  
+Users can filter events by type (Cleanup, Donation, Plantation, etc.) or search events by name.
+
+**Upcoming Events:**  
+The app automatically filters and shows only future events (based on event date).
+
+ **Toast Notifications:**  
+Custom success and error messages using `react-hot-toast` — no default browser alerts.
+
+**Private Routes:**  
+Users cannot access protected pages (like Create Event or My Events) without logging in.  
+Reloading the page does **not** redirect logged-in users back to login.
+
+**Responsive Design:**  
+Fully mobile-friendly layout built using Tailwind CSS and DaisyUI.
+
+---
+
+## 🧠 Tech Stack
+
+| Category | Technology 
+
+ **Frontend** : React, React Router, Tailwind CSS, DaisyUI, React Hot Toast, React DatePicker |
+**Backend** :Node.js, Express.js 
+**Database**:MongoDB Atlas 
+**Authentication** : Firebase Auth + Firebase Admin SDK 
+**Hosting** :Client → Netlify / Vercel, Server → Vercel 
+
+---
+
+
+
+## Authentication Flow
+
+- Firebase Authentication handles user login/register.  
+- On login, the user gets an **ID token**.  
+- Token is sent with each protected API request using:

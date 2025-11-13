@@ -9,29 +9,32 @@ const Upcoming = () => {
 
   // Fetch events from backend
   useEffect(() => {
-    const fetchEvents = async () => {
-      setLoading(true);
-      try {
-        const query =
-          filter || search
-            ? `?${filter ? `type=${filter}&` : ""}${search ? `search=${search}` : ""}`
-            : "";
+  const fetchEvents = async () => {
+    setLoading(true);
+    try {
+      const params = new URLSearchParams();
+      if (filter) params.append("type", filter);
+      if (search) params.append("search", search);
+      const query = params.toString() ? `?${params.toString()}` : "";
 
-        const res = await fetch(`http://localhost:3000/upcoming-social-steps${query}`);
-        const data = await res.json();
-        setEvents(data.data || []);
-      } catch (err) {
-        console.error("Error fetching events:", err);
-      } finally {
-        setLoading(false);
-      }
-    };
+      const res = await fetch(
+        `https://social-platform-server-psi.vercel.app/upcoming-social-steps${query}`
+      );
+      const data = await res.json();
+      setEvents(data.data || []);
+    } catch (err) {
+      console.error("Error fetching events:", err);
+    } finally {
+      setLoading(false);
+    }
+  };
 
-    fetchEvents();
-  }, [filter, search]);
+  fetchEvents();
+}, [filter, search]);
+
 
   return (
-    <div className="min-h-screen bg-green-50 py-10 px-6">
+    <div className="min-h-screen  py-10 px-6">
       <h1 className="text-3xl font-bold text-center text-green-700 mb-6">
         Upcoming Events
       </h1>
@@ -61,7 +64,10 @@ const Upcoming = () => {
 
       {/* Event Cards */}
       {loading ? (
-        <p className="text-center text-gray-500">Loading events...</p>
+        // <span className="loading loading-spinner text-success"></span>
+        <div className="flex justify-center items-center min-h-[60vh]">
+    <span className="loading loading-spinner loading-lg text-green-600"></span>
+  </div>
       ) : events.length === 0 ? (
         <p className="text-center text-gray-500">No events found.</p>
       ) : (
