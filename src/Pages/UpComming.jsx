@@ -64,7 +64,7 @@ const Upcoming = () => {
 
       {/* Event Cards */}
       {loading ? (
-        // <span className="loading loading-spinner text-success"></span>
+      
         <div className="flex justify-center items-center min-h-[60vh]">
     <span className="loading loading-spinner loading-lg text-green-600"></span>
   </div>
