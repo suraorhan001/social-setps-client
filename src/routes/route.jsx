@@ -8,7 +8,7 @@ import ManageEvent from "../Pages/ManageEvent";
 import PraivateRoute from "../Provider/PraivateRoute";
 import UpComming from "../Pages/UpComming";
 import EventDetails from "../Pages/EventDetails";
-//import { id } from "react-day-picker/locale";
+
 import JointEvent from "../Pages/JointEvent";
 import UpdateEventForm from "../Pages/UpdateEvent";
 import UpdateEvent from "../Pages/UpdateEvent";
